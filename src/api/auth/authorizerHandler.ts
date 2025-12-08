@@ -1,0 +1,1 @@
+// authorizerHandler for Lambda auth
