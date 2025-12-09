@@ -3,14 +3,14 @@ import { CallbackController } from '../../controllers/CallbackController';
 import { SessionService } from '../../services/SessionService';
 import { PgSessionRepository } from '../../repositories/PgSessionRepository';
 import { PgEvidenceRepository } from '../../repositories/PgEvidenceRepository';
-import { StubProviderAdapter } from '../../providers/implementations/StubProviderAdapter';
+import { StubNordicAdapter } from '../../providers/implementations/StubNordicProviderAdapter';
 import pool from '../../infra/db/pool';
 import { HTTP_RESPONSES } from '../httpResponse';
 const controller = new CallbackController(
     new SessionService(
         new PgSessionRepository(pool),
         new PgEvidenceRepository(pool),
-        new StubProviderAdapter(),
+        new StubNordicAdapter(),
     ),
 );
 

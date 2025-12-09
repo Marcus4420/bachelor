@@ -1,14 +1,14 @@
 
 import { ProviderAdapter } from './ProviderAdapter';
-import { StubProviderAdapter } from './implementations/StubProviderAdapter';
-import { StubCopyProviderAdapter } from './implementations/StubProviderAdapterCopy';
+import { StubNordicAdapter } from './implementations/StubNordicProviderAdapter';
+import { StubEuroProviderAdapter } from './implementations/StubEuroProviderAdapter';
 
 export function getProviderAdapter(providerName: string): ProviderAdapter {
     switch (providerName) {
-        case 'stub':
-            return new StubProviderAdapter();
-        case 'stubCopy':
-            return new StubCopyProviderAdapter();
+        case 'stubNordic':
+            return new StubNordicAdapter();
+        case 'stubEuro':
+            return new StubEuroProviderAdapter();
         default:
             throw new Error(`Unknown provider: ${providerName}`);
     }

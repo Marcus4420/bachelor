@@ -1,8 +1,5 @@
+import { StartSessionRequest } from '../domain/Session';
 import { SessionService } from '../services/SessionService';
-
-export interface StartSessionRequest {
-    externalId: string;
-}
 
 export interface StartSessionResponse {
     sessionId: string;

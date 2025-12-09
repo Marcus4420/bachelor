@@ -1,8 +1,8 @@
 import { ProviderAdapter } from '../ProviderAdapter';
 import { SessionConfig } from '../../domain/Session';
 
-export class StubProviderAdapter implements ProviderAdapter {
-    id = 'stub';
+export class StubEuroProviderAdapter implements ProviderAdapter {
+    id = 'euro-stub';
 
     async createSession(sessionConfig: SessionConfig) {
         return { redirectUrl: `https://stub-provider/redirect/${sessionConfig.id}` };
