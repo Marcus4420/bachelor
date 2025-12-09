@@ -4,9 +4,8 @@ import { SessionService } from '../../services/SessionService';
 import { PgSessionRepository } from '../../repositories/PgSessionRepository';
 import { PgEvidenceRepository } from '../../repositories/PgEvidenceRepository';
 import { StubProviderAdapter } from '../../providers/implementations/StubProviderAdapter';
-import { Pool } from 'pg';
-
-const pool = new Pool({});
+import pool from '../../infra/db/pool';
+import { HTTP_RESPONSES } from '../httpResponse';
 const controller = new CallbackController(
     new SessionService(
         new PgSessionRepository(pool),
@@ -17,13 +16,13 @@ const controller = new CallbackController(
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     if (!event.body) {
-        return { statusCode: 400, body: JSON.stringify({ error: 'Missing body' }) };
+        return HTTP_RESPONSES.badRequest('Missing body');
     }
     const payload = JSON.parse(event.body);
     try {
         await controller.handleProviderCallback(payload);
-        return { statusCode: 204, body: '' };
+        return HTTP_RESPONSES.noContent;
     } catch (err: any) {
-        return { statusCode: 400, body: JSON.stringify({ error: err.message }) };
+        return HTTP_RESPONSES.badRequest(err.message);
     }
 };

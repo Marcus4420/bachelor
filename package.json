@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "build:terraform": "tsc && powershell Compress-Archive -Path dist/* -DestinationPath dist/eid-service.zip",
     "start": "node dist/index.js",
     "dev": "tsc --watch"
   },

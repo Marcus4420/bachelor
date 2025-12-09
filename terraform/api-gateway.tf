@@ -36,10 +36,11 @@ resource "aws_apigatewayv2_integration" "start_session" {
 }
 
 resource "aws_apigatewayv2_route" "start_session" {
-  api_id        = aws_apigatewayv2_api.http_api.id
-  route_key     = "POST /sessions"
-  target        = "integrations/${aws_apigatewayv2_integration.start_session.id}"
-  authorizer_id = aws_apigatewayv2_authorizer.lambda_auth.id
+  api_id            = aws_apigatewayv2_api.http_api.id
+  route_key         = "POST /sessions"
+  target            = "integrations/${aws_apigatewayv2_integration.start_session.id}"
+  authorization_type = "CUSTOM"
+  authorizer_id      = aws_apigatewayv2_authorizer.lambda_auth.id
 }
 
 resource "aws_lambda_permission" "apigw_invoke_start_session" {
@@ -62,6 +63,7 @@ resource "aws_apigatewayv2_route" "get_evidence" {
   api_id        = aws_apigatewayv2_api.http_api.id
   route_key     = "GET /sessions/{sessionId}/evidence"
   target        = "integrations/${aws_apigatewayv2_integration.get_evidence.id}"
+  authorization_type = "CUSTOM"
   authorizer_id = aws_apigatewayv2_authorizer.lambda_auth.id
 }
 
@@ -85,6 +87,7 @@ resource "aws_apigatewayv2_route" "callback" {
   api_id        = aws_apigatewayv2_api.http_api.id
   route_key     = "POST /callbacks/provider"
   target        = "integrations/${aws_apigatewayv2_integration.callback.id}"
+  authorization_type = "CUSTOM"
   authorizer_id = aws_apigatewayv2_authorizer.lambda_auth.id
 }
 
