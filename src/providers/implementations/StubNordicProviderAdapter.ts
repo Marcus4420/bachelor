@@ -1,7 +1,7 @@
 import { ProviderAdapter } from '../ProviderAdapter';
 import { SessionConfig } from '../../domain/Session';
 
-export class StubNordicAdapter implements ProviderAdapter {
+export class StubNordicProviderAdapter implements ProviderAdapter {
     id = 'nordic-stub';
 
     async createSession(sessionConfig: SessionConfig) {

@@ -17,3 +17,5 @@ export class StubEuroProviderAdapter implements ProviderAdapter {
         };
     }
 }
+
+

@@ -6,7 +6,7 @@ import { PgEvidenceRepository } from '../../repositories/PgEvidenceRepository';
 
 
 import { StartSessionRequest } from '../../domain/Session';
-import { getProviderAdapter as ProviderFactory } from '../../providers/providerFactory';
+import { getProviderAdapter as ProviderFactory } from '../../providers/providerAdapterFactory';
 import pool from '../../infra/db/pool';
 import { HTTP_RESPONSES } from '../httpResponse';
 
