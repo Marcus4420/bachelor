@@ -1,24 +1,46 @@
 import {
     APIGatewayRequestAuthorizerEventV2,
-    APIGatewaySimpleAuthorizerWithContextResult,
+    APIGatewayAuthorizerResult,
 } from 'aws-lambda';
 
-// TODO: Replace with real OAuth2/OIDC validation in production
+// Accept any non-empty Authorization header. Replace with real validation later.
 export const handler = async (
     event: APIGatewayRequestAuthorizerEventV2
-): Promise<APIGatewaySimpleAuthorizerWithContextResult<{ sub: string; scope: string }>> => {
+): Promise<APIGatewayAuthorizerResult> => {
     const token = event.identitySource?.[0];
+
     if (!token) {
         return {
-            isAuthorized: false,
+            principalId: 'unauthorized',
+            policyDocument: {
+                Version: '2012-10-17',
+                Statement: [
+                    {
+                        Action: 'execute-api:Invoke',
+                        Effect: 'Deny',
+                        Resource: event.routeArn ?? '*',
+                    },
+                ],
+            },
             context: {
                 sub: '',
                 scope: '',
             },
         };
     }
+
     return {
-        isAuthorized: true,
+        principalId: 'stub-user',
+        policyDocument: {
+            Version: '2012-10-17',
+            Statement: [
+                {
+                    Action: 'execute-api:Invoke',
+                    Effect: 'Allow',
+                    Resource: event.routeArn ?? '*',
+                },
+            ],
+        },
         context: {
             sub: 'stub-user',
             scope: 'eid:session',

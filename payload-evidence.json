@@ -1,0 +1,1 @@
+{"version":"2.0","routeKey":"GET /sessions/{sessionId}/evidence","rawPath":"/sessions/8891c326-8be4-48a6-90aa-d6b7828ffac0/evidence","rawQueryString":"","pathParameters":{"sessionId":"8891c326-8be4-48a6-90aa-d6b7828ffac0"},"requestContext":{"http":{"method":"GET","path":"/sessions/8891c326-8be4-48a6-90aa-d6b7828ffac0/evidence"}},"isBase64Encoded":false}

@@ -1,0 +1,1 @@
+{"version":"2.0","routeKey":"POST /sessions","rawPath":"/sessions","rawQueryString":"","headers":{"x-provider":"stubNordic","content-type":"application/json"},"requestContext":{"http":{"method":"POST","path":"/sessions"}},"body":"{\"externalId\":\"ext-123\",\"provider\":\"stubNordic\"}","isBase64Encoded":false}
