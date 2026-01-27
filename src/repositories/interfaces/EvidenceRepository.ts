@@ -1,4 +1,5 @@
 export interface AuditEventRecord {
+    id: string;
     sessionId: string;
     type: string;
     payloadHash: string;

@@ -11,7 +11,7 @@ export class StubEuroProviderAdapter implements ProviderAdapter {
     async handleCallback(payload: any) {
         // Simulate callback handling
         return {
-            sessionExternalId: payload.sessionExternalId ?? 'unknown',
+            sessionId: payload.sessionId ?? 'unknown',
             status: payload.status ?? 'COMPLETED',
             providerPayloadHash: 'stubhash',
         };

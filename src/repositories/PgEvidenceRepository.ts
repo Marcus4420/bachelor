@@ -6,9 +6,9 @@ export class PgEvidenceRepository implements EvidenceRepository {
 
     async appendEvent(event: AuditEventRecord): Promise<void> {
         await this.pool.query(
-            `INSERT INTO audit_events (session_id, type, payload_hash, occurred_at)
-			 VALUES ($1, $2, $3, now())`,
-            [event.sessionId, event.type, event.payloadHash],
+            `INSERT INTO audit_events (id, session_id, type, payload_hash, occurred_at)
+             VALUES ($1, $2, $3, $4, now())`,
+            [event.id, event.sessionId, event.type, event.payloadHash],
         );
     }
 

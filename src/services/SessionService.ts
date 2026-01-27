@@ -3,6 +3,7 @@ import { ProviderAdapter } from '../providers/ProviderAdapter';
 import { SessionRepository } from '../repositories/interfaces/SessionRepository';
 import { EvidenceRepository } from '../repositories/interfaces/EvidenceRepository';
 import crypto from 'crypto';
+import { randomUUID } from '../utils/uuid';
 
 export class SessionService {
     constructor(
@@ -26,6 +27,7 @@ export class SessionService {
         const { redirectUrl } = await this.provider.createSession(session);
 
         await this.evidenceRepo.appendEvent({
+            id: randomUUID(),
             sessionId: session.id,
             type: 'SESSION_CREATED',
             payloadHash: '',
@@ -36,11 +38,12 @@ export class SessionService {
 
     async handleCallback(payload: unknown) {
         const result = await this.provider.handleCallback(payload);
-        const session = await this.sessionRepo.findByExternalId(result.sessionExternalId);
+        const session = await this.sessionRepo.findById(result.sessionId);
         if (!session) return;
 
         await this.sessionRepo.updateStatus(session.id, result.status as SessionStatus);
         await this.evidenceRepo.appendEvent({
+            id: randomUUID(),
             sessionId: session.id,
             type: 'PROVIDER_CALLBACK',
             payloadHash: result.providerPayloadHash,
